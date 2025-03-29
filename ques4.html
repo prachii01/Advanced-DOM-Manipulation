@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Task List</title>
+</head>
+<body>
+  <input id="taskInput" type="text" placeholder="Enter task">
+  <button id="addTask">Add Task</button>
+  <ul id="taskList"></ul>
+
+  <script>
+    // Selecting elements
+    const addTaskButton = document.getElementById('addTask');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    addTaskButton.onclick = function () {
+      const taskText = taskInput.value.trim(); // Fix 1: Trim whitespace
+
+      if (taskText === "") {
+        alert("Please enter a task!"); // Fix 2: Prevent empty tasks
+        return;
+      }
+
+      const newTask = document.createElement('li');
+      newTask.textContent = taskText; // Fix 3: Use textContent instead of innerHTML (to prevent XSS)
+      
+      taskList.appendChild(newTask); // Fix 4: Use appendChild instead of append
+
+      taskInput.value = ""; // Fix 5: Clear input after adding task
+    };
+
+    taskList.onclick = function (e) {
+      if (e.target.tagName === 'LI') { // Fix 6: Use e.target.tagName (not e.tagName)
+        e.target.remove(); // Now correctly removes the clicked task
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Paragraphs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Dynamic Paragraphs</h2>
+    <button id="addParagraph">Add Paragraph</button>
+    <button id="removeParagraph">Remove Last Paragraph</button>
+
+    <div id="contentBox" class="container">
+        <!-- New paragraphs will be added here -->
+    </div>
+
+    <script>
+        const contentBox = document.getElementById("contentBox");
+        const addButton = document.getElementById("addParagraph");
+        const removeButton = document.getElementById("removeParagraph");
+
+        // Add paragraph
+        addButton.addEventListener("click", function() {
+            const newParagraph = document.createElement("p");
+            newParagraph.textContent = "This is a new paragraph.";
+            contentBox.appendChild(newParagraph);
+        });
+
+        // Remove last paragraph
+        removeButton.addEventListener("click", function() {
+            if (contentBox.lastChild) { // Ensure there's a paragraph to remove
+                contentBox.removeChild(contentBox.lastChild);
+            } else {
+                alert("No more paragraphs to remove!");
+            }
+        });
+    </script>
+
+</body>
+</html>
